@@ -110,6 +110,7 @@ public class ProductService {
 
         merchantStock.setStock(merchantStock.getStock() - 1);
         user.setBalance(user.getBalance() - product.getPrice());
+         userRepository.save(user);
         return "Purchase successful.";
     }
 
@@ -191,7 +192,7 @@ public class ProductService {
 
     // get product by id
     public Product getProductById (Integer id){
-        Product p=productRepository.getById(id);
+        Product p=productRepository.findProductById(id);
         if (p == null) {
             return null;
         }
@@ -221,6 +222,7 @@ public class ProductService {
 
         wishList.add(product); // Add Product to wish List
         user.setScore(user.getScore() + 1); // Increase user's score // when user added product to wish list , Score is increase
+        userRepository.save(user);
         return " Product added successfully , You have One Point Score !! ";
        }
 
